@@ -110,7 +110,10 @@ public class JsonReflector {
 		} else if (type == double.class || type == Double.class) {
 			return jsonObj.getDouble(nodeName);
 
-		} else {
+		} else if (type == long.class || type == Long.class) {
+			return jsonObj.getLong(nodeName);
+
+		}  else {
 			Object obj;
 			try {
 				obj = type.newInstance();
@@ -162,7 +165,11 @@ public class JsonReflector {
 			} else if (childrenType == double.class || childrenType == Double.class) {
 				child = jsonArray.getDouble(i);
 
-			} else {
+			} else if (childrenType == long.class || childrenType == Long.class) {
+				child = jsonArray.getLong(i);
+
+			}  
+			else {
 				child = childrenType.newInstance();
 				reflectJsonObject(child, jsonArray.getJSONObject(i));
 			}
